@@ -9,6 +9,8 @@ def main(argv):
         sys.exit(1)
 
     for filename in argv[1:]:
+        if filename == "":
+            continue
         with open(filename, 'r') as file:
             code = file.read()
             parser = ParserClass()
