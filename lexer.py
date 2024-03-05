@@ -9,7 +9,6 @@ class LexerClass:
     reserved = {
     "NULL": "NULL",
     "null": "NULL",
-    #TODO preguntar a que se refiere con "se podrá utilizar de manera completa"
     "TR": "BOOLEAN",
     "tr": "BOOLEAN",
     "FL": "BOOLEAN",
@@ -125,3 +124,4 @@ class LexerClass:
         self.lexer.input(string)
         for token in self.lexer:
             print(token.type, token.value)
+        return self.lexer

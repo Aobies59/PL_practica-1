@@ -1,1 +1,3 @@
-3 == 2e10 0b001 {} "test" a_2 _2 ,: tr fl NULL null TR FL
+{
+    Test: 1 < 2
+}
