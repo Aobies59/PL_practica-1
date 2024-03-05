@@ -1,0 +1,17 @@
+Axima = {Ajson} | vacio
+
+Ajson = vacio | clave:valor | Ajsonprima,Ajsonbeta | Ajsonbeta
+Ajsonprima = Ajsonalfa | Ajsonprima, Ajsonprima
+Ajsonbeta = Ajsonalfa, Ajsonalfa | Ajsonalfa Ajsonalfa | Ajsonalfa, 
+Ajsonalfa = clave:valor
+
+clave = cadena_com | cadena_no_com
+valor = numero | cadena_com | bool |  numero operador numero | null | {Ajson}
+numero = bin | octavl | hex | cientifico | entero | real
+operador = == | < | > | >= | <=
+
+
+permitir que ejecute solo lexico
+hacer memoria
+-----opcional-----
+valor = [Ajson]
