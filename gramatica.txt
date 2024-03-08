@@ -1,17 +1,8 @@
-Axima = {Ajson} | vacio
-
-Ajson = vacio | clave:valor | Ajsonprima,Ajsonbeta | Ajsonbeta
-Ajsonprima = Ajsonalfa | Ajsonprima, Ajsonprima
-Ajsonbeta = Ajsonalfa, Ajsonalfa | Ajsonalfa Ajsonalfa | Ajsonalfa, 
-Ajsonalfa = clave:valor
-
-clave = cadena_com | cadena_no_com
-valor = numero | cadena_com | bool |  numero operador numero | null | {Ajson}
-numero = bin | octavl | hex | cientifico | entero | real
-operador = == | < | > | >= | <=
-
-
-permitir que ejecute solo lexico
-hacer memoria
------opcional-----
-valor = [Ajson]
+Axiom = {Element} | λ
+Element = NonLastElement, LastElement | LastElement | λ
+NonLastElement = String:Value | NonLastElement, NonLastElement
+LastElement = String:Value, | String:Value
+String = QUOTED_STRING | UNQUOTED_STRING
+Value = Number | QUOTED_STRING | BOOLEAN | Number Operator Number | NULL | {Element}
+Number = INT | FLOAT | BINARY | OCTAL | HEXADECIMAL
+Operator = == | < | > | >= | <=

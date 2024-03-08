@@ -1,0 +1,617 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> axiom
+Rule 1     axiom -> OPEN_DELIMITER element CLOSE_DELIMITER
+Rule 2     axiom -> empty
+Rule 3     element -> stringvalue nextelement
+Rule 4     element -> empty
+Rule 5     nextelement -> possiblecomma
+Rule 6     nextelement -> COMMA element
+Rule 7     possiblecomma -> COMMA
+Rule 8     possiblecomma -> empty
+Rule 9     stringvalue -> string COLON value
+Rule 10    string -> QUOTED_STRING
+Rule 11    string -> UNQUOTED_STRING
+Rule 12    value -> number
+Rule 13    value -> QUOTED_STRING
+Rule 14    value -> BOOLEAN
+Rule 15    value -> operation
+Rule 16    value -> NULL
+Rule 17    value -> nested_element
+Rule 18    nested_element -> OPEN_DELIMITER element CLOSE_DELIMITER
+Rule 19    number -> INT
+Rule 20    number -> FLOAT
+Rule 21    number -> BINARY
+Rule 22    number -> OCTAL
+Rule 23    number -> HEXADECIMAL
+Rule 24    operation -> equal_operation
+Rule 25    operation -> greater_operation
+Rule 26    operation -> greater_or_equal_operation
+Rule 27    operation -> less_operation
+Rule 28    operation -> less_or_equal_operation
+Rule 29    equal_operation -> number EQUAL number
+Rule 30    greater_operation -> number GREATER number
+Rule 31    greater_or_equal_operation -> number GREATER_OR_EQUAL number
+Rule 32    less_operation -> number LESS number
+Rule 33    less_or_equal_operation -> number LESS_OR_EQUAL number
+Rule 34    empty -> <empty>
+
+Terminals, with rules where they appear
+
+BINARY               : 21
+BOOLEAN              : 14
+CLOSE_DELIMITER      : 1 18
+COLON                : 9
+COMMA                : 6 7
+EQUAL                : 29
+FLOAT                : 20
+GREATER              : 30
+GREATER_OR_EQUAL     : 31
+HEXADECIMAL          : 23
+INT                  : 19
+LESS                 : 32
+LESS_OR_EQUAL        : 33
+NULL                 : 16
+OCTAL                : 22
+OPEN_DELIMITER       : 1 18
+QUOTED_STRING        : 10 13
+UNQUOTED_STRING      : 11
+error                : 
+
+Nonterminals, with rules where they appear
+
+axiom                : 0
+element              : 1 6 18
+empty                : 2 4 8
+equal_operation      : 24
+greater_operation    : 25
+greater_or_equal_operation : 26
+less_operation       : 27
+less_or_equal_operation : 28
+nested_element       : 17
+nextelement          : 3
+number               : 12 29 29 30 30 31 31 32 32 33 33
+operation            : 15
+possiblecomma        : 5
+string               : 9
+stringvalue          : 3
+value                : 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . axiom
+    (1) axiom -> . OPEN_DELIMITER element CLOSE_DELIMITER
+    (2) axiom -> . empty
+    (34) empty -> .
+
+    OPEN_DELIMITER  shift and go to state 2
+    $end            reduce using rule 34 (empty -> .)
+
+    axiom                          shift and go to state 1
+    empty                          shift and go to state 3
+
+state 1
+
+    (0) S' -> axiom .
+
+
+
+state 2
+
+    (1) axiom -> OPEN_DELIMITER . element CLOSE_DELIMITER
+    (3) element -> . stringvalue nextelement
+    (4) element -> . empty
+    (9) stringvalue -> . string COLON value
+    (34) empty -> .
+    (10) string -> . QUOTED_STRING
+    (11) string -> . UNQUOTED_STRING
+
+    CLOSE_DELIMITER reduce using rule 34 (empty -> .)
+    QUOTED_STRING   shift and go to state 8
+    UNQUOTED_STRING shift and go to state 9
+
+    element                        shift and go to state 4
+    stringvalue                    shift and go to state 5
+    empty                          shift and go to state 6
+    string                         shift and go to state 7
+
+state 3
+
+    (2) axiom -> empty .
+
+    $end            reduce using rule 2 (axiom -> empty .)
+
+
+state 4
+
+    (1) axiom -> OPEN_DELIMITER element . CLOSE_DELIMITER
+
+    CLOSE_DELIMITER shift and go to state 10
+
+
+state 5
+
+    (3) element -> stringvalue . nextelement
+    (5) nextelement -> . possiblecomma
+    (6) nextelement -> . COMMA element
+    (7) possiblecomma -> . COMMA
+    (8) possiblecomma -> . empty
+    (34) empty -> .
+
+    COMMA           shift and go to state 13
+    CLOSE_DELIMITER reduce using rule 34 (empty -> .)
+
+    nextelement                    shift and go to state 11
+    possiblecomma                  shift and go to state 12
+    empty                          shift and go to state 14
+
+state 6
+
+    (4) element -> empty .
+
+    CLOSE_DELIMITER reduce using rule 4 (element -> empty .)
+
+
+state 7
+
+    (9) stringvalue -> string . COLON value
+
+    COLON           shift and go to state 15
+
+
+state 8
+
+    (10) string -> QUOTED_STRING .
+
+    COLON           reduce using rule 10 (string -> QUOTED_STRING .)
+
+
+state 9
+
+    (11) string -> UNQUOTED_STRING .
+
+    COLON           reduce using rule 11 (string -> UNQUOTED_STRING .)
+
+
+state 10
+
+    (1) axiom -> OPEN_DELIMITER element CLOSE_DELIMITER .
+
+    $end            reduce using rule 1 (axiom -> OPEN_DELIMITER element CLOSE_DELIMITER .)
+
+
+state 11
+
+    (3) element -> stringvalue nextelement .
+
+    CLOSE_DELIMITER reduce using rule 3 (element -> stringvalue nextelement .)
+
+
+state 12
+
+    (5) nextelement -> possiblecomma .
+
+    CLOSE_DELIMITER reduce using rule 5 (nextelement -> possiblecomma .)
+
+
+state 13
+
+    (6) nextelement -> COMMA . element
+    (7) possiblecomma -> COMMA .
+    (3) element -> . stringvalue nextelement
+    (4) element -> . empty
+    (9) stringvalue -> . string COLON value
+    (34) empty -> .
+    (10) string -> . QUOTED_STRING
+    (11) string -> . UNQUOTED_STRING
+
+  ! reduce/reduce conflict for CLOSE_DELIMITER resolved using rule 7 (possiblecomma -> COMMA .)
+    CLOSE_DELIMITER reduce using rule 7 (possiblecomma -> COMMA .)
+    QUOTED_STRING   shift and go to state 8
+    UNQUOTED_STRING shift and go to state 9
+
+  ! CLOSE_DELIMITER [ reduce using rule 34 (empty -> .) ]
+
+    element                        shift and go to state 16
+    stringvalue                    shift and go to state 5
+    empty                          shift and go to state 6
+    string                         shift and go to state 7
+
+state 14
+
+    (8) possiblecomma -> empty .
+
+    CLOSE_DELIMITER reduce using rule 8 (possiblecomma -> empty .)
+
+
+state 15
+
+    (9) stringvalue -> string COLON . value
+    (12) value -> . number
+    (13) value -> . QUOTED_STRING
+    (14) value -> . BOOLEAN
+    (15) value -> . operation
+    (16) value -> . NULL
+    (17) value -> . nested_element
+    (19) number -> . INT
+    (20) number -> . FLOAT
+    (21) number -> . BINARY
+    (22) number -> . OCTAL
+    (23) number -> . HEXADECIMAL
+    (24) operation -> . equal_operation
+    (25) operation -> . greater_operation
+    (26) operation -> . greater_or_equal_operation
+    (27) operation -> . less_operation
+    (28) operation -> . less_or_equal_operation
+    (18) nested_element -> . OPEN_DELIMITER element CLOSE_DELIMITER
+    (29) equal_operation -> . number EQUAL number
+    (30) greater_operation -> . number GREATER number
+    (31) greater_or_equal_operation -> . number GREATER_OR_EQUAL number
+    (32) less_operation -> . number LESS number
+    (33) less_or_equal_operation -> . number LESS_OR_EQUAL number
+
+    QUOTED_STRING   shift and go to state 19
+    BOOLEAN         shift and go to state 20
+    NULL            shift and go to state 22
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 25
+    BINARY          shift and go to state 26
+    OCTAL           shift and go to state 27
+    HEXADECIMAL     shift and go to state 28
+    OPEN_DELIMITER  shift and go to state 34
+
+    value                          shift and go to state 17
+    number                         shift and go to state 18
+    operation                      shift and go to state 21
+    nested_element                 shift and go to state 23
+    equal_operation                shift and go to state 29
+    greater_operation              shift and go to state 30
+    greater_or_equal_operation     shift and go to state 31
+    less_operation                 shift and go to state 32
+    less_or_equal_operation        shift and go to state 33
+
+state 16
+
+    (6) nextelement -> COMMA element .
+
+    CLOSE_DELIMITER reduce using rule 6 (nextelement -> COMMA element .)
+
+
+state 17
+
+    (9) stringvalue -> string COLON value .
+
+    COMMA           reduce using rule 9 (stringvalue -> string COLON value .)
+    CLOSE_DELIMITER reduce using rule 9 (stringvalue -> string COLON value .)
+
+
+state 18
+
+    (12) value -> number .
+    (29) equal_operation -> number . EQUAL number
+    (30) greater_operation -> number . GREATER number
+    (31) greater_or_equal_operation -> number . GREATER_OR_EQUAL number
+    (32) less_operation -> number . LESS number
+    (33) less_or_equal_operation -> number . LESS_OR_EQUAL number
+
+    COMMA           reduce using rule 12 (value -> number .)
+    CLOSE_DELIMITER reduce using rule 12 (value -> number .)
+    EQUAL           shift and go to state 35
+    GREATER         shift and go to state 36
+    GREATER_OR_EQUAL shift and go to state 37
+    LESS            shift and go to state 38
+    LESS_OR_EQUAL   shift and go to state 39
+
+
+state 19
+
+    (13) value -> QUOTED_STRING .
+
+    COMMA           reduce using rule 13 (value -> QUOTED_STRING .)
+    CLOSE_DELIMITER reduce using rule 13 (value -> QUOTED_STRING .)
+
+
+state 20
+
+    (14) value -> BOOLEAN .
+
+    COMMA           reduce using rule 14 (value -> BOOLEAN .)
+    CLOSE_DELIMITER reduce using rule 14 (value -> BOOLEAN .)
+
+
+state 21
+
+    (15) value -> operation .
+
+    COMMA           reduce using rule 15 (value -> operation .)
+    CLOSE_DELIMITER reduce using rule 15 (value -> operation .)
+
+
+state 22
+
+    (16) value -> NULL .
+
+    COMMA           reduce using rule 16 (value -> NULL .)
+    CLOSE_DELIMITER reduce using rule 16 (value -> NULL .)
+
+
+state 23
+
+    (17) value -> nested_element .
+
+    COMMA           reduce using rule 17 (value -> nested_element .)
+    CLOSE_DELIMITER reduce using rule 17 (value -> nested_element .)
+
+
+state 24
+
+    (19) number -> INT .
+
+    EQUAL           reduce using rule 19 (number -> INT .)
+    GREATER         reduce using rule 19 (number -> INT .)
+    GREATER_OR_EQUAL reduce using rule 19 (number -> INT .)
+    LESS            reduce using rule 19 (number -> INT .)
+    LESS_OR_EQUAL   reduce using rule 19 (number -> INT .)
+    COMMA           reduce using rule 19 (number -> INT .)
+    CLOSE_DELIMITER reduce using rule 19 (number -> INT .)
+
+
+state 25
+
+    (20) number -> FLOAT .
+
+    EQUAL           reduce using rule 20 (number -> FLOAT .)
+    GREATER         reduce using rule 20 (number -> FLOAT .)
+    GREATER_OR_EQUAL reduce using rule 20 (number -> FLOAT .)
+    LESS            reduce using rule 20 (number -> FLOAT .)
+    LESS_OR_EQUAL   reduce using rule 20 (number -> FLOAT .)
+    COMMA           reduce using rule 20 (number -> FLOAT .)
+    CLOSE_DELIMITER reduce using rule 20 (number -> FLOAT .)
+
+
+state 26
+
+    (21) number -> BINARY .
+
+    EQUAL           reduce using rule 21 (number -> BINARY .)
+    GREATER         reduce using rule 21 (number -> BINARY .)
+    GREATER_OR_EQUAL reduce using rule 21 (number -> BINARY .)
+    LESS            reduce using rule 21 (number -> BINARY .)
+    LESS_OR_EQUAL   reduce using rule 21 (number -> BINARY .)
+    COMMA           reduce using rule 21 (number -> BINARY .)
+    CLOSE_DELIMITER reduce using rule 21 (number -> BINARY .)
+
+
+state 27
+
+    (22) number -> OCTAL .
+
+    EQUAL           reduce using rule 22 (number -> OCTAL .)
+    GREATER         reduce using rule 22 (number -> OCTAL .)
+    GREATER_OR_EQUAL reduce using rule 22 (number -> OCTAL .)
+    LESS            reduce using rule 22 (number -> OCTAL .)
+    LESS_OR_EQUAL   reduce using rule 22 (number -> OCTAL .)
+    COMMA           reduce using rule 22 (number -> OCTAL .)
+    CLOSE_DELIMITER reduce using rule 22 (number -> OCTAL .)
+
+
+state 28
+
+    (23) number -> HEXADECIMAL .
+
+    EQUAL           reduce using rule 23 (number -> HEXADECIMAL .)
+    GREATER         reduce using rule 23 (number -> HEXADECIMAL .)
+    GREATER_OR_EQUAL reduce using rule 23 (number -> HEXADECIMAL .)
+    LESS            reduce using rule 23 (number -> HEXADECIMAL .)
+    LESS_OR_EQUAL   reduce using rule 23 (number -> HEXADECIMAL .)
+    COMMA           reduce using rule 23 (number -> HEXADECIMAL .)
+    CLOSE_DELIMITER reduce using rule 23 (number -> HEXADECIMAL .)
+
+
+state 29
+
+    (24) operation -> equal_operation .
+
+    COMMA           reduce using rule 24 (operation -> equal_operation .)
+    CLOSE_DELIMITER reduce using rule 24 (operation -> equal_operation .)
+
+
+state 30
+
+    (25) operation -> greater_operation .
+
+    COMMA           reduce using rule 25 (operation -> greater_operation .)
+    CLOSE_DELIMITER reduce using rule 25 (operation -> greater_operation .)
+
+
+state 31
+
+    (26) operation -> greater_or_equal_operation .
+
+    COMMA           reduce using rule 26 (operation -> greater_or_equal_operation .)
+    CLOSE_DELIMITER reduce using rule 26 (operation -> greater_or_equal_operation .)
+
+
+state 32
+
+    (27) operation -> less_operation .
+
+    COMMA           reduce using rule 27 (operation -> less_operation .)
+    CLOSE_DELIMITER reduce using rule 27 (operation -> less_operation .)
+
+
+state 33
+
+    (28) operation -> less_or_equal_operation .
+
+    COMMA           reduce using rule 28 (operation -> less_or_equal_operation .)
+    CLOSE_DELIMITER reduce using rule 28 (operation -> less_or_equal_operation .)
+
+
+state 34
+
+    (18) nested_element -> OPEN_DELIMITER . element CLOSE_DELIMITER
+    (3) element -> . stringvalue nextelement
+    (4) element -> . empty
+    (9) stringvalue -> . string COLON value
+    (34) empty -> .
+    (10) string -> . QUOTED_STRING
+    (11) string -> . UNQUOTED_STRING
+
+    CLOSE_DELIMITER reduce using rule 34 (empty -> .)
+    QUOTED_STRING   shift and go to state 8
+    UNQUOTED_STRING shift and go to state 9
+
+    element                        shift and go to state 40
+    stringvalue                    shift and go to state 5
+    empty                          shift and go to state 6
+    string                         shift and go to state 7
+
+state 35
+
+    (29) equal_operation -> number EQUAL . number
+    (19) number -> . INT
+    (20) number -> . FLOAT
+    (21) number -> . BINARY
+    (22) number -> . OCTAL
+    (23) number -> . HEXADECIMAL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 25
+    BINARY          shift and go to state 26
+    OCTAL           shift and go to state 27
+    HEXADECIMAL     shift and go to state 28
+
+    number                         shift and go to state 41
+
+state 36
+
+    (30) greater_operation -> number GREATER . number
+    (19) number -> . INT
+    (20) number -> . FLOAT
+    (21) number -> . BINARY
+    (22) number -> . OCTAL
+    (23) number -> . HEXADECIMAL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 25
+    BINARY          shift and go to state 26
+    OCTAL           shift and go to state 27
+    HEXADECIMAL     shift and go to state 28
+
+    number                         shift and go to state 42
+
+state 37
+
+    (31) greater_or_equal_operation -> number GREATER_OR_EQUAL . number
+    (19) number -> . INT
+    (20) number -> . FLOAT
+    (21) number -> . BINARY
+    (22) number -> . OCTAL
+    (23) number -> . HEXADECIMAL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 25
+    BINARY          shift and go to state 26
+    OCTAL           shift and go to state 27
+    HEXADECIMAL     shift and go to state 28
+
+    number                         shift and go to state 43
+
+state 38
+
+    (32) less_operation -> number LESS . number
+    (19) number -> . INT
+    (20) number -> . FLOAT
+    (21) number -> . BINARY
+    (22) number -> . OCTAL
+    (23) number -> . HEXADECIMAL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 25
+    BINARY          shift and go to state 26
+    OCTAL           shift and go to state 27
+    HEXADECIMAL     shift and go to state 28
+
+    number                         shift and go to state 44
+
+state 39
+
+    (33) less_or_equal_operation -> number LESS_OR_EQUAL . number
+    (19) number -> . INT
+    (20) number -> . FLOAT
+    (21) number -> . BINARY
+    (22) number -> . OCTAL
+    (23) number -> . HEXADECIMAL
+
+    INT             shift and go to state 24
+    FLOAT           shift and go to state 25
+    BINARY          shift and go to state 26
+    OCTAL           shift and go to state 27
+    HEXADECIMAL     shift and go to state 28
+
+    number                         shift and go to state 45
+
+state 40
+
+    (18) nested_element -> OPEN_DELIMITER element . CLOSE_DELIMITER
+
+    CLOSE_DELIMITER shift and go to state 46
+
+
+state 41
+
+    (29) equal_operation -> number EQUAL number .
+
+    COMMA           reduce using rule 29 (equal_operation -> number EQUAL number .)
+    CLOSE_DELIMITER reduce using rule 29 (equal_operation -> number EQUAL number .)
+
+
+state 42
+
+    (30) greater_operation -> number GREATER number .
+
+    COMMA           reduce using rule 30 (greater_operation -> number GREATER number .)
+    CLOSE_DELIMITER reduce using rule 30 (greater_operation -> number GREATER number .)
+
+
+state 43
+
+    (31) greater_or_equal_operation -> number GREATER_OR_EQUAL number .
+
+    COMMA           reduce using rule 31 (greater_or_equal_operation -> number GREATER_OR_EQUAL number .)
+    CLOSE_DELIMITER reduce using rule 31 (greater_or_equal_operation -> number GREATER_OR_EQUAL number .)
+
+
+state 44
+
+    (32) less_operation -> number LESS number .
+
+    COMMA           reduce using rule 32 (less_operation -> number LESS number .)
+    CLOSE_DELIMITER reduce using rule 32 (less_operation -> number LESS number .)
+
+
+state 45
+
+    (33) less_or_equal_operation -> number LESS_OR_EQUAL number .
+
+    COMMA           reduce using rule 33 (less_or_equal_operation -> number LESS_OR_EQUAL number .)
+    CLOSE_DELIMITER reduce using rule 33 (less_or_equal_operation -> number LESS_OR_EQUAL number .)
+
+
+state 46
+
+    (18) nested_element -> OPEN_DELIMITER element CLOSE_DELIMITER .
+
+    COMMA           reduce using rule 18 (nested_element -> OPEN_DELIMITER element CLOSE_DELIMITER .)
+    CLOSE_DELIMITER reduce using rule 18 (nested_element -> OPEN_DELIMITER element CLOSE_DELIMITER .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 13 resolved using rule (possiblecomma -> COMMA)
+WARNING: rejected rule (empty -> <empty>) in state 13
