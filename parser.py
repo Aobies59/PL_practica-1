@@ -21,22 +21,20 @@ class ParserClass:
             print(f'FICHERO AJSON VACIO "{self.filename}"')
 
     def p_element(self, p):
-        """element : stringvalue nextelement
+        """element : stringvalue next_element
         | empty"""
-        p[0] = p[1]
+        if len(p) == 3:
+            p[0] = p[1] + p[2]
+        else:
+            p[0] = p[1]
 
-    def p_nextelement(self, p):
-        """nextelement : possiblecomma
-        | COMMA element"""
+    def p_next_element(self, p):
+        '''next_element : COMMA element
+        | empty'''
         if len(p) == 3:
             p[0] = p[2]
         else:
-            p[0] = ""
-
-    def p_possiblecomma(self, p):
-        """possiblecomma : COMMA
-        | empty"""
-
+            p[0] = p[1]
 
     def p_stringvalue(self, p):
         """stringvalue : string COLON value"""
@@ -113,7 +111,7 @@ class ParserClass:
     
     def p_empty(self, p):
         'empty :'
-        pass
+        p[0] = ""
 
     def test(self, string):
         self.parser.parse(string)
