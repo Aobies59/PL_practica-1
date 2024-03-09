@@ -12,4 +12,5 @@ FILES=(*)
 FILES=("${FILES[@]/$SELF}")
 
 # Call the Python script with the filenames as arguments
-python ../main.py "${FILES[@]}"
+python ../main.py 0 "${FILES[@]}"
+python ../main.py 1 "${FILES[@]}"
