@@ -1,5 +1,5 @@
 from ply import yacc
-from lexer import LexerClass
+from ajson_lexer import LexerClass
 
 
 class ParserClass:
@@ -9,13 +9,20 @@ class ParserClass:
         self.parser = yacc.yacc(module=self)
         self.filename = filename
 
+    def print_possible_list(self, element):
+        if isinstance(element, list):
+            for sub_element in element:
+                self.print_possible_list(sub_element)
+        else:
+            print(element)
+
     def p_axiom(self, p):
         """axiom : OPEN_DELIMITER element CLOSE_DELIMITER
         | empty"""
         if len(p) == 4:
             p[0] = p[2]
             print(f'FICHERO AJSON "{self.filename}"')
-            print(p[0])
+            self.print_possible_list(p[0])
         else:
             p[0] = []
             print(f'FICHERO AJSON VACIO "{self.filename}"')
@@ -39,11 +46,16 @@ class ParserClass:
     def p_stringvalue(self, p):
         """stringvalue : string COLON value"""
         # check if value starts with a dot
-        if isinstance(p[3], str) and p[3].startswith('.'):
-            p[0] = f"{p[1]}{p[3]}"
+        if isinstance(p[3], list):
+            p[0] = []
+            for element in p[3]:
+                if element.startswith('.'):
+                    p[0] += [f"{p[1]}{element}"]
+                else:
+                    p[0] += [f"{p[1]}: {element}"]
         else:
-            p[0] = f"{p[1]}: {p[3]}\n".strip("'")
-    
+            p[0] = [f"{p[1]}: {p[3]}"]
+
     def p_string(self, p):
         """string : QUOTED_STRING
         | UNQUOTED_STRING"""
@@ -60,7 +72,11 @@ class ParserClass:
 
     def p_nested_element(self, p):
         'nested_element : OPEN_DELIMITER element CLOSE_DELIMITER'
-        p[0] = f".{p[2]}"
+        # If element is nested, add dot prefix for all sub-elements
+        if isinstance(p[2], list):
+            p[0] = [f".{sub_element}" for sub_element in p[2]]
+        else:
+            p[0] = [f".{p[2]}"]
 
     def p_number(self, p):
         """number : INT
@@ -81,37 +97,32 @@ class ParserClass:
     def p_equal_operation(self, p):
         'equal_operation : number EQUAL number'
         p[0] = str(p[1] == p[3])
-        
 
     def p_greater_operation(self, p):
         'greater_operation : number GREATER number'
         p[0] = str(p[1] > p[3])
-        
-    
+
     def p_greater_or_equal_operation(self, p):
         'greater_or_equal_operation : number GREATER_OR_EQUAL number'
         p[0] = str(p[1] >= p[3])
-        
 
     def p_less_operation(self, p):
         'less_operation : number LESS number'
         p[0] = str(p[1] < p[3])
-        
 
     def p_less_or_equal_operation(self, p):
         'less_or_equal_operation : number LESS_OR_EQUAL number'
         p[0] = str(p[1] <= p[3])
-        
 
     def p_error(self, p):
         if p:
             print("Syntax error at '%s'" % p.value)
         else:
             print("Syntax error at EOF")
-    
+
     def p_empty(self, p):
         'empty :'
-        p[0] = ""
+        p[0] = []
 
     def test(self, string):
         self.parser.parse(string)

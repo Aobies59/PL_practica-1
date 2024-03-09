@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BINARY BOOLEAN CLOSE_DELIMITER COLON COMMA EQUAL FLOAT GREATER GREATER_OR_EQUAL HEXADECIMAL INT LESS LESS_OR_EQUAL NULL OCTAL OPEN_DELIMITER QUOTED_STRING UNQUOTED_STRINGaxiom : OPEN_DELIMITER element CLOSE_DELIMITER\n        | emptyelement : stringvalue nextelement\n        | emptynextelement : possiblecomma\n        | COMMA elementpossiblecomma : COMMA\n        | emptystringvalue : string COLON valuestring : QUOTED_STRING\n        | UNQUOTED_STRINGvalue : number\n        | QUOTED_STRING\n        | BOOLEAN\n        | operation\n        | NULL\n        | nested_elementnested_element : OPEN_DELIMITER element CLOSE_DELIMITERnumber : INT\n        | FLOAT\n        | BINARY\n        | OCTAL\n        | HEXADECIMALoperation : equal_operation\n        | greater_operation\n        | greater_or_equal_operation\n        | less_operation\n        | less_or_equal_operationequal_operation : number EQUAL numbergreater_operation : number GREATER numbergreater_or_equal_operation : number GREATER_OR_EQUAL numberless_operation : number LESS numberless_or_equal_operation : number LESS_OR_EQUAL numberempty :'
+_lr_signature = 'BINARY BOOLEAN CLOSE_DELIMITER COLON COMMA EQUAL FLOAT GREATER GREATER_OR_EQUAL HEXADECIMAL INT LESS LESS_OR_EQUAL NULL OCTAL OPEN_DELIMITER QUOTED_STRING UNQUOTED_STRINGaxiom : OPEN_DELIMITER element CLOSE_DELIMITER\n        | emptyelement : stringvalue next_element\n        | emptynext_element : COMMA element\n        | emptystringvalue : string COLON valuestring : QUOTED_STRING\n        | UNQUOTED_STRINGvalue : number\n        | QUOTED_STRING\n        | BOOLEAN\n        | operation\n        | NULL\n        | nested_elementnested_element : OPEN_DELIMITER element CLOSE_DELIMITERnumber : INT\n        | FLOAT\n        | BINARY\n        | OCTAL\n        | HEXADECIMALoperation : equal_operation\n        | greater_operation\n        | greater_or_equal_operation\n        | less_operation\n        | less_or_equal_operationequal_operation : number EQUAL numbergreater_operation : number GREATER numbergreater_or_equal_operation : number GREATER_OR_EQUAL numberless_operation : number LESS numberless_or_equal_operation : number LESS_OR_EQUAL numberempty :'
     
-_lr_action_items = {'OPEN_DELIMITER':([0,15,],[2,34,]),'$end':([0,1,3,10,],[-34,0,-2,-1,]),'CLOSE_DELIMITER':([2,4,5,6,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,40,41,42,43,44,45,46,],[-34,10,-34,-4,-3,-5,-7,-8,-6,-9,-12,-13,-14,-15,-16,-17,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-34,46,-29,-30,-31,-32,-33,-18,]),'QUOTED_STRING':([2,13,15,34,],[8,8,19,8,]),'UNQUOTED_STRING':([2,13,34,],[9,9,9,]),'COMMA':([5,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,41,42,43,44,45,46,],[13,-9,-12,-13,-14,-15,-16,-17,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-18,]),'COLON':([7,8,9,],[15,-10,-11,]),'BOOLEAN':([15,],[20,]),'NULL':([15,],[22,]),'INT':([15,35,36,37,38,39,],[24,24,24,24,24,24,]),'FLOAT':([15,35,36,37,38,39,],[25,25,25,25,25,25,]),'BINARY':([15,35,36,37,38,39,],[26,26,26,26,26,26,]),'OCTAL':([15,35,36,37,38,39,],[27,27,27,27,27,27,]),'HEXADECIMAL':([15,35,36,37,38,39,],[28,28,28,28,28,28,]),'EQUAL':([18,24,25,26,27,28,],[35,-19,-20,-21,-22,-23,]),'GREATER':([18,24,25,26,27,28,],[36,-19,-20,-21,-22,-23,]),'GREATER_OR_EQUAL':([18,24,25,26,27,28,],[37,-19,-20,-21,-22,-23,]),'LESS':([18,24,25,26,27,28,],[38,-19,-20,-21,-22,-23,]),'LESS_OR_EQUAL':([18,24,25,26,27,28,],[39,-19,-20,-21,-22,-23,]),}
+_lr_action_items = {'OPEN_DELIMITER':([0,14,],[2,33,]),'$end':([0,1,3,10,],[-32,0,-2,-1,]),'CLOSE_DELIMITER':([2,4,5,6,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,39,40,41,42,43,44,45,],[-32,10,-32,-4,-3,-32,-6,-5,-7,-10,-11,-12,-13,-14,-15,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-32,45,-27,-28,-29,-30,-31,-16,]),'QUOTED_STRING':([2,12,14,33,],[8,8,18,8,]),'UNQUOTED_STRING':([2,12,33,],[9,9,9,]),'COMMA':([5,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,40,41,42,43,44,45,],[12,-7,-10,-11,-12,-13,-14,-15,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-16,]),'COLON':([7,8,9,],[14,-8,-9,]),'BOOLEAN':([14,],[19,]),'NULL':([14,],[21,]),'INT':([14,34,35,36,37,38,],[23,23,23,23,23,23,]),'FLOAT':([14,34,35,36,37,38,],[24,24,24,24,24,24,]),'BINARY':([14,34,35,36,37,38,],[25,25,25,25,25,25,]),'OCTAL':([14,34,35,36,37,38,],[26,26,26,26,26,26,]),'HEXADECIMAL':([14,34,35,36,37,38,],[27,27,27,27,27,27,]),'EQUAL':([17,23,24,25,26,27,],[34,-17,-18,-19,-20,-21,]),'GREATER':([17,23,24,25,26,27,],[35,-17,-18,-19,-20,-21,]),'GREATER_OR_EQUAL':([17,23,24,25,26,27,],[36,-17,-18,-19,-20,-21,]),'LESS':([17,23,24,25,26,27,],[37,-17,-18,-19,-20,-21,]),'LESS_OR_EQUAL':([17,23,24,25,26,27,],[38,-17,-18,-19,-20,-21,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'axiom':([0,],[1,]),'empty':([0,2,5,13,34,],[3,6,14,6,6,]),'element':([2,13,34,],[4,16,40,]),'stringvalue':([2,13,34,],[5,5,5,]),'string':([2,13,34,],[7,7,7,]),'nextelement':([5,],[11,]),'possiblecomma':([5,],[12,]),'value':([15,],[17,]),'number':([15,35,36,37,38,39,],[18,41,42,43,44,45,]),'operation':([15,],[21,]),'nested_element':([15,],[23,]),'equal_operation':([15,],[29,]),'greater_operation':([15,],[30,]),'greater_or_equal_operation':([15,],[31,]),'less_operation':([15,],[32,]),'less_or_equal_operation':([15,],[33,]),}
+_lr_goto_items = {'axiom':([0,],[1,]),'empty':([0,2,5,12,33,],[3,6,13,6,6,]),'element':([2,12,33,],[4,15,39,]),'stringvalue':([2,12,33,],[5,5,5,]),'string':([2,12,33,],[7,7,7,]),'next_element':([5,],[11,]),'value':([14,],[16,]),'number':([14,34,35,36,37,38,],[17,40,41,42,43,44,]),'operation':([14,],[20,]),'nested_element':([14,],[22,]),'equal_operation':([14,],[28,]),'greater_operation':([14,],[29,]),'greater_or_equal_operation':([14,],[30,]),'less_operation':([14,],[31,]),'less_or_equal_operation':([14,],[32,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,38 +27,36 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> axiom","S'",1,None,None,None),
-  ('axiom -> OPEN_DELIMITER element CLOSE_DELIMITER','axiom',3,'p_axiom','parser.py',13),
-  ('axiom -> empty','axiom',1,'p_axiom','parser.py',14),
-  ('element -> stringvalue nextelement','element',2,'p_element','parser.py',24),
-  ('element -> empty','element',1,'p_element','parser.py',25),
-  ('nextelement -> possiblecomma','nextelement',1,'p_nextelement','parser.py',29),
-  ('nextelement -> COMMA element','nextelement',2,'p_nextelement','parser.py',30),
-  ('possiblecomma -> COMMA','possiblecomma',1,'p_possiblecomma','parser.py',37),
-  ('possiblecomma -> empty','possiblecomma',1,'p_possiblecomma','parser.py',38),
-  ('stringvalue -> string COLON value','stringvalue',3,'p_stringvalue','parser.py',42),
-  ('string -> QUOTED_STRING','string',1,'p_string','parser.py',50),
-  ('string -> UNQUOTED_STRING','string',1,'p_string','parser.py',51),
-  ('value -> number','value',1,'p_value','parser.py',55),
-  ('value -> QUOTED_STRING','value',1,'p_value','parser.py',56),
-  ('value -> BOOLEAN','value',1,'p_value','parser.py',57),
-  ('value -> operation','value',1,'p_value','parser.py',58),
-  ('value -> NULL','value',1,'p_value','parser.py',59),
-  ('value -> nested_element','value',1,'p_value','parser.py',60),
-  ('nested_element -> OPEN_DELIMITER element CLOSE_DELIMITER','nested_element',3,'p_nested_element','parser.py',64),
-  ('number -> INT','number',1,'p_number','parser.py',68),
-  ('number -> FLOAT','number',1,'p_number','parser.py',69),
-  ('number -> BINARY','number',1,'p_number','parser.py',70),
-  ('number -> OCTAL','number',1,'p_number','parser.py',71),
-  ('number -> HEXADECIMAL','number',1,'p_number','parser.py',72),
-  ('operation -> equal_operation','operation',1,'p_operation','parser.py',76),
-  ('operation -> greater_operation','operation',1,'p_operation','parser.py',77),
-  ('operation -> greater_or_equal_operation','operation',1,'p_operation','parser.py',78),
-  ('operation -> less_operation','operation',1,'p_operation','parser.py',79),
-  ('operation -> less_or_equal_operation','operation',1,'p_operation','parser.py',80),
-  ('equal_operation -> number EQUAL number','equal_operation',3,'p_equal_operation','parser.py',84),
-  ('greater_operation -> number GREATER number','greater_operation',3,'p_greater_operation','parser.py',89),
-  ('greater_or_equal_operation -> number GREATER_OR_EQUAL number','greater_or_equal_operation',3,'p_greater_or_equal_operation','parser.py',94),
-  ('less_operation -> number LESS number','less_operation',3,'p_less_operation','parser.py',99),
-  ('less_or_equal_operation -> number LESS_OR_EQUAL number','less_or_equal_operation',3,'p_less_or_equal_operation','parser.py',104),
-  ('empty -> <empty>','empty',0,'p_empty','parser.py',115),
+  ('axiom -> OPEN_DELIMITER element CLOSE_DELIMITER','axiom',3,'p_axiom','parser.py',20),
+  ('axiom -> empty','axiom',1,'p_axiom','parser.py',21),
+  ('element -> stringvalue next_element','element',2,'p_element','parser.py',31),
+  ('element -> empty','element',1,'p_element','parser.py',32),
+  ('next_element -> COMMA element','next_element',2,'p_next_element','parser.py',39),
+  ('next_element -> empty','next_element',1,'p_next_element','parser.py',40),
+  ('stringvalue -> string COLON value','stringvalue',3,'p_stringvalue','parser.py',47),
+  ('string -> QUOTED_STRING','string',1,'p_string','parser.py',60),
+  ('string -> UNQUOTED_STRING','string',1,'p_string','parser.py',61),
+  ('value -> number','value',1,'p_value','parser.py',65),
+  ('value -> QUOTED_STRING','value',1,'p_value','parser.py',66),
+  ('value -> BOOLEAN','value',1,'p_value','parser.py',67),
+  ('value -> operation','value',1,'p_value','parser.py',68),
+  ('value -> NULL','value',1,'p_value','parser.py',69),
+  ('value -> nested_element','value',1,'p_value','parser.py',70),
+  ('nested_element -> OPEN_DELIMITER element CLOSE_DELIMITER','nested_element',3,'p_nested_element','parser.py',74),
+  ('number -> INT','number',1,'p_number','parser.py',82),
+  ('number -> FLOAT','number',1,'p_number','parser.py',83),
+  ('number -> BINARY','number',1,'p_number','parser.py',84),
+  ('number -> OCTAL','number',1,'p_number','parser.py',85),
+  ('number -> HEXADECIMAL','number',1,'p_number','parser.py',86),
+  ('operation -> equal_operation','operation',1,'p_operation','parser.py',90),
+  ('operation -> greater_operation','operation',1,'p_operation','parser.py',91),
+  ('operation -> greater_or_equal_operation','operation',1,'p_operation','parser.py',92),
+  ('operation -> less_operation','operation',1,'p_operation','parser.py',93),
+  ('operation -> less_or_equal_operation','operation',1,'p_operation','parser.py',94),
+  ('equal_operation -> number EQUAL number','equal_operation',3,'p_equal_operation','parser.py',98),
+  ('greater_operation -> number GREATER number','greater_operation',3,'p_greater_operation','parser.py',102),
+  ('greater_or_equal_operation -> number GREATER_OR_EQUAL number','greater_or_equal_operation',3,'p_greater_or_equal_operation','parser.py',106),
+  ('less_operation -> number LESS number','less_operation',3,'p_less_operation','parser.py',110),
+  ('less_or_equal_operation -> number LESS_OR_EQUAL number','less_or_equal_operation',3,'p_less_or_equal_operation','parser.py',114),
+  ('empty -> <empty>','empty',0,'p_empty','parser.py',124),
 ]

@@ -1,6 +1,10 @@
 {
     nested_element : {
         value : 1,
-        value2: 2
+        nested_element2: {
+            value2: 2,
+            value3: 3
+        },
+        value4: 4
     }
 }

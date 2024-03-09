@@ -1,6 +1,5 @@
 import sys
-from lexer import LexerClass
-from parser import ParserClass
+from ajson_parser import ParserClass
 
 
 def main(argv):
@@ -9,9 +8,9 @@ def main(argv):
         sys.exit(1)
 
     elif len(argv) == 2:
-        with open(filename, 'r') as file:
+        with open(argv[1], 'r') as file:
             code = file.read()
-            parser = ParserClass(filename)
+            parser = ParserClass(argv[1])
             parser.test(code)
             sys.exit(0)
 
