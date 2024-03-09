@@ -42,7 +42,7 @@ class LexerClass:
         return t
 
     def t_FLOAT(self, t):
-        r'-?((\d+|\d*\.\d+)(e|E)(-?\d+)|(\d+\.\d+))'
+        r'-?((\d+|\d*\.\d+)(e|E)(-?\d+)|(\d*\.\d+))'
         t.value = float(t.value)
         return t
 
