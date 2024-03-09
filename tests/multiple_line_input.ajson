@@ -3,4 +3,8 @@
     Test2: -2,
     Test3: -3.2,
     Test4: -.1,
+    "Test5": "test string",
+    Test6: .2e24,
+    "Test7": TR,
+    Test8: 0b11
 }

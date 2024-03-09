@@ -39,6 +39,12 @@ class LexerClass:
     def t_reserved(self, t):
         r'(NULL|null|TR|tr|FL|fl)\b'
         t.type = self.reserved.get(t.value)
+        if t.value == "TR" or t.value == "tr":
+            t.value = True
+        elif t.value == "FL" or t.value == "fl":
+            t.value = False
+        else:
+            t.value = None
         return t
 
     def t_FLOAT(self, t):
@@ -47,7 +53,7 @@ class LexerClass:
         return t
 
     def t_BINARY(self, t):
-        r'0b[01]+'
+        r'0(b|B)[01]+'
         t.value = int(t.value, 2)
         return t
 

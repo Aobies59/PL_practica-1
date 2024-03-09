@@ -50,11 +50,11 @@ class ParserClass:
             p[0] = []
             for element in p[3]:
                 if element.startswith('.'):
-                    p[0] += [f"{p[1]}{element}"]
+                    p[0] += [f"{p[1]}{element.strip('"') if isinstance(element, str) else element}"]
                 else:
-                    p[0] += [f"{p[1]}: {element}"]
+                    p[0] += [f"{p[1]}: {element.strip('"') if isinstance(element, str) else element}"]
         else:
-            p[0] = [f"{p[1]}: {p[3]}"]
+            p[0] = [f"{p[1]}: {p[3].strip('"') if isinstance(p[3], str) else p[3]}"]
 
     def p_string(self, p):
         """string : QUOTED_STRING
